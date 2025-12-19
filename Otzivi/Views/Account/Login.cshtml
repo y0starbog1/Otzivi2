@@ -1,0 +1,185 @@
+﻿@model Otzivi.ViewModels.AccountLoginViewModel
+@{
+    ViewData["Title"] = "Вход в систему";
+    var returnUrl = ViewData["ReturnUrl"] as string ?? "/";
+}
+
+<!-- ДОБАВЬТЕ ЭТОТ БЛОК ДЛЯ ОТЛАДКИ -->
+<div style="background-color: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; margin-bottom: 20px; border-radius: 5px;">
+    <h4 style="color: #856404;">Отладка капчи</h4>
+    <p><strong>Путь к капче:</strong> <code>/Captcha/GetImage</code></p>
+    <p><strong>Прямая ссылка:</strong> <a href="/Captcha/GetImage" target="_blank" id="testLink">Открыть капчу в новой вкладке</a></p>
+    <p><strong>Статус:</strong> <span id="captchaStatus">Проверяем...</span></p>
+    <button onclick="testCaptcha()" class="btn btn-sm btn-warning">Тест капчи</button>
+</div>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Вход</h4>
+                </div>
+
+                <div class="card-body">
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                {
+                                    <li>@error.ErrorMessage</li>
+                                }
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
+
+                    <form method="post" asp-action="Login">
+                        <input type="hidden" name="ReturnUrl" value="@returnUrl" />
+
+                        <div class="mb-3">
+                            <label for="Email" class="form-label">Email</label>
+                            <input type="email"
+                                   class="form-control"
+                                   id="Email"
+                                   name="Email"
+                                   asp-for="Email"
+                                   required
+                                   placeholder="user@example.com">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Password" class="form-label">Пароль</label>
+                            <input type="password"
+                                   class="form-control"
+                                   id="Password"
+                                   name="Password"
+                                   asp-for="Password"
+                                   required
+                                   placeholder="Введите пароль">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <!-- КАПЧА -->
+                        <div class="mb-3">
+                            <label for="CaptchaCode" class="form-label">Введите код с картинки:</label>
+                            <div class="d-flex align-items-center mb-2">
+                                <img id="captchaImage"
+                                     src="/Captcha/GetImage"
+                                     alt="CAPTCHA"
+                                     class="border rounded"
+                                     style="height: 50px; width: 150px; background-color: #f8f9fa;"
+                                     onerror="imgError(this)">
+                                <button type="button"
+                                        onclick="refreshCaptcha()"
+                                        class="btn btn-outline-secondary btn-sm ms-2">
+                                    🔄 Обновить
+                                </button>
+                            </div>
+                            <input type="text"
+                                   class="form-control"
+                                   id="CaptchaCode"
+                                   name="CaptchaCode"
+                                   asp-for="CaptchaCode"
+                                   required
+                                   placeholder="Введите 4 символа"
+                                   maxlength="4"
+                                   style="width: 200px;">
+                            <span asp-validation-for="CaptchaCode" class="text-danger"></span>
+                            <div class="form-text">Введите символы, которые видите на картинке</div>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox"
+                                   class="form-check-input"
+                                   id="RememberMe"
+                                   name="RememberMe"
+                                   asp-for="RememberMe">
+                            <label class="form-check-label" for="RememberMe">Запомнить меня</label>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">Войти</button>
+                            <a href="@Url.Action("Register", "Account")" class="btn btn-link">Нет аккаунта? Зарегистрироваться</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Функция для тестирования капчи
+        function testCaptcha() {
+            var testLink = document.getElementById('testLink');
+            var status = document.getElementById('captchaStatus');
+
+            status.innerHTML = 'Проверяем...';
+            status.style.color = 'orange';
+
+            fetch('/Captcha/GetImage')
+                .then(response => {
+                    if (response.ok) {
+                        status.innerHTML = '✅ Капча доступна (статус: ' + response.status + ')';
+                        status.style.color = 'green';
+                        testLink.style.color = 'green';
+
+                        // Обновляем изображение на странице
+                        refreshCaptcha();
+                    } else {
+                        status.innerHTML = '❌ Ошибка: ' + response.status;
+                        status.style.color = 'red';
+                        testLink.style.color = 'red';
+                    }
+                })
+                .catch(error => {
+                    status.innerHTML = '❌ Ошибка сети: ' + error.message;
+                    status.style.color = 'red';
+                    testLink.style.color = 'red';
+                });
+        }
+
+        // Функция обновления капчи
+        function refreshCaptcha() {
+            var captchaImg = document.getElementById('captchaImage');
+            var timestamp = new Date().getTime();
+            // Добавляем параметр времени, чтобы избежать кэширования
+            captchaImg.src = '/Captcha/GetImage?t=' + timestamp;
+
+            // Обновляем тестовую ссылку
+            document.getElementById('testLink').href = '/Captcha/GetImage?t=' + timestamp;
+
+            // Очищаем поле ввода
+            document.getElementById('CaptchaCode').value = '';
+        }
+
+        // Обработчик ошибок загрузки изображения
+        function imgError(image) {
+            console.error('Ошибка загрузки капчи');
+            image.style.border = '2px solid red';
+            image.alt = 'Ошибка загрузки капчи';
+            document.getElementById('captchaStatus').innerHTML = '❌ Ошибка загрузки изображения';
+            document.getElementById('captchaStatus').style.color = 'red';
+        }
+
+        // Обновляем капчу при загрузке страницы и тестируем
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Страница загружена, проверяем капчу...');
+            testCaptcha();
+        });
+                @if (ViewData["TimeoutMessage"] != null)
+        {
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <i class="fas fa-clock me-2"></i>
+                    @ViewData["TimeoutMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+        }
+    </script>
+}

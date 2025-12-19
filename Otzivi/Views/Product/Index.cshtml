@@ -1,0 +1,92 @@
+﻿@model List<Otzivi.Models.Product>
+@{
+    ViewData["Title"] = "Брендовая одежда";
+}
+
+<div class="container">
+    <!-- 🌟 ГЛАВНЫЙ ЗАГОЛОВОК -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold mb-3">Брендовая Одежда</h1>
+        <p class="lead text-muted">Отзывы о лучших брендах от реальных покупателей</p>
+    </div>
+
+    <!-- 🎯 СЕТКА ТОВАРОВ -->
+    <div class="row g-4">
+        @foreach (var product in Model)
+        {
+            <div class="col-xl-4 col-lg-6 col-md-6">
+                <div class="card product-card h-100">
+                    <div class="position-relative overflow-hidden">
+                        <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name"
+                             style="height: 280px; object-fit: cover;">
+                        <div class="position-absolute top-0 end-0 m-3">
+                            <span class="badge bg-primary bg-gradient">
+                                <i class="fas fa-tag me-1"></i>@product.Category
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="card-body d-flex flex-column">
+                        <div class="mb-2">
+                            <span class="badge bg-secondary bg-gradient mb-2">@product.Brand</span>
+                        </div>
+
+                        <h5 class="card-title flex-grow-0">@product.Name</h5>
+                        <p class="card-text text-muted flex-grow-1">@product.Description</p>
+
+                        <div class="mt-auto">
+                            <!-- ⭐ РЕЙТИНГ -->
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="text-warning me-2">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        <i class="fas fa-star@(i <= product.AverageRating ? " text-warning" : "-o text-muted")"></i>
+                                    }
+                                </div>
+                                <small class="text-muted">(@product.TotalReviews отзывов)</small>
+                            </div>
+
+                            <!-- 💰 ЦЕНА И КНОПКА -->
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="h4 mb-0 text-success fw-bold">@product.Price.ToString("C")</span>
+                                <a href="@Url.Action("Details", "Product", new { id = product.Id })"
+                                   class="btn btn-primary btn-glow">
+                                    <i class="fas fa-eye me-2"></i>Смотреть
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .btn-glow {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-glow:hover::before {
+            left: 100%;
+        }
+
+    .display-4 {
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+</style>

@@ -1,0 +1,46 @@
+﻿@model Otzivi.ViewModels.VerifySecurityQuestionViewModel
+@{
+    ViewData["Title"] = "Проверка безопасности";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4><i class="fas fa-shield-alt"></i> Дополнительная проверка безопасности</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <h5>Секретный вопрос:</h5>
+                        <p class="fw-bold">@Model.SecurityQuestion</p>
+                    </div>
+
+                    <form method="post">
+                        <input type="hidden" asp-for="UserId" />
+                        <input type="hidden" asp-for="ReturnUrl" /> <!-- 👈 ДОБАВЬ ЭТУ СТРОКУ -->
+                        <input type="hidden" asp-for="SecurityQuestion" />
+                        <input type="hidden" asp-for="RememberMe" />
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="SecurityAnswer" class="form-label">Ваш ответ:</label>
+                            <input asp-for="SecurityAnswer" class="form-control" placeholder="Введите ответ..." />
+                            <span asp-validation-for="SecurityAnswer" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Продолжить</button>
+                            <a href="/Identity/Account/Login" class="btn btn-secondary">Отмена</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

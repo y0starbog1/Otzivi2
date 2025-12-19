@@ -1,0 +1,90 @@
+﻿@model List<Otzivi.Models.Review>
+@{
+    ViewData["Title"] = "Панель модератора";
+}
+
+<div class="container mt-4">
+    <h1>🛡️ Панель модератора</h1>
+
+    @if (TempData["StatusMessage"] != null)
+    {
+        <div class="alert alert-info">@TempData["StatusMessage"]</div>
+    }
+
+    <div class="card">
+        <div class="card-header">
+            <h5>Управление отзывами</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Товар</th>
+                            <th>Пользователь</th>
+                            <th>Отзыв</th>
+                            <th>Рейтинг</th>
+                            <th>Дата</th>
+                            <th>Статус</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var review in Model)
+                        {
+                            <tr>
+                                <td>@review.Product?.Name</td>
+                                <td>@review.User?.UserName</td>
+                                <td>
+                                    <strong>@review.Title</strong><br>
+                                    <small>@review.Content</small>
+                                </td>
+                                <td>
+                                    <span class="badge bg-primary">@review.Rating/5</span>
+                                </td>
+                                <td>@review.CreatedAt.ToString("dd.MM.yyyy")</td>
+                                <td>
+                                    @if (review.IsActive)
+                                    {
+                                        <span class="badge bg-success">Активен</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">Скрыт</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        @if (review.IsActive)
+                                        {
+                                            <form method="post" asp-action="HideReview" class="me-1">
+                                                <input type="hidden" name="reviewId" value="@review.Id" />
+                                                <button type="submit" class="btn btn-outline-warning btn-sm">Скрыть</button>
+                                            </form>
+                                        }
+                                        else
+                                        {
+                                            <form method="post" asp-action="ShowReview" class="me-1">
+                                                <input type="hidden" name="reviewId" value="@review.Id" />
+                                                <button type="submit" class="btn btn-outline-success btn-sm">Восстановить</button>
+                                            </form>
+                                        }
+
+                                        <!-- Удаление только для админа -->
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <form method="post" asp-action="DeleteReview" onsubmit="return confirm('Удалить отзыв навсегда?')">
+                                                <input type="hidden" name="reviewId" value="@review.Id" />
+                                                <button type="submit" class="btn btn-outline-danger btn-sm">🗑️ Удалить</button>
+                                            </form>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Личный кабинет";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Личный кабинет</h1>
+
+            @if (TempData["StatusMessage"] != null)
+            {
+                <div class="alert alert-info">@TempData["StatusMessage"]</div>
+            }
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Добро пожаловать, @User.Identity.Name!</h5>
+                    <p class="card-text">
+                        <strong>Email:</strong> @ViewBag.Email<br>
+                        <strong>ID пользователя:</strong> @ViewBag.UserId
+                    </p>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5>🔐 Двухфакторная аутентификация (Секретный вопрос)</h5>
+                </div>
+                <div class="card-body">
+                    @if (!string.IsNullOrEmpty(ViewBag.SecurityQuestion))
+                    {
+                        <div class="alert alert-success">
+                            <strong>Секретный вопрос установлен:</strong> @ViewBag.SecurityQuestion
+                        </div>
+
+                        <p>
+                            <strong>Статус 2FA:</strong>
+                            @if (ViewBag.IsSecurityQuestionEnabled)
+                            {
+                                <span class="badge bg-success">Включена</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning">Выключена</span>
+                            }
+                        </p>
+
+                        <div class="btn-group">
+                            @if (ViewBag.IsSecurityQuestionEnabled)
+                            {
+                                <form method="post" asp-action="ToggleSecurityQuestion2FA" class="me-2">
+                                    <input type="hidden" name="enable" value="false" />
+                                    <button type="submit" class="btn btn-warning">Выключить 2FA</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <form method="post" asp-action="ToggleSecurityQuestion2FA" class="me-2">
+                                    <input type="hidden" name="enable" value="true" />
+                                    <button type="submit" class="btn btn-success">Включить 2FA</button>
+                                </form>
+                            }
+                            <a asp-action="SetSecurityQuestion" class="btn btn-primary">Изменить вопрос</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning">
+                            <strong>Секретный вопрос не установлен</strong>
+                            <p>Для включения двухфакторной аутентификации установите секретный вопрос</p>
+                        </div>
+                        <a asp-action="SetSecurityQuestion" class="btn btn-primary">Установить секретный вопрос</a>
+                    }
+                </div>
+            </div>
+            <a href="@Url.Action("MySecurityEvents", "Security")" class="btn btn-outline-warning me-2">
+                🔐 История безопасности
+            </a>
+            <div class="card">
+                <div class="card-body">
+                    <h6>Быстрые действия:</h6>
+                    <a href="@Url.Action("MyReviews", "Review")" class="btn btn-outline-primary me-2">Мои отзывы</a>
+                    <a href="@Url.Action("Index", "Product")" class="btn btn-outline-secondary me-2">Все товары</a>
+                    <a href="/Identity/Account/Manage/ChangePassword" class="btn btn-outline-info">Сменить пароль</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

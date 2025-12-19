@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html lang="ru" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Otzivi</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Otzivi.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Подключаем simpleSession.js для ВСЕХ пользователей -->
+    <script src="~/js/simpleSession.js" asp-append-version="true"></script>
+
+    <!-- Стили для футера -->
+    <style>
+        .site-footer {
+            background: linear-gradient(135deg, var(--background) 0%, #1e1b4b 100%);
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+            margin-top: auto;
+        }
+
+            .site-footer a {
+                color: var(--text-muted);
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+                .site-footer a:hover {
+                    color: var(--primary-light);
+                }
+
+        .footer-section-title {
+            color: var(--text);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-copyright {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Обеспечиваем минимальную высоту страницы */
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            flex: 1 0 auto;
+        }
+
+        .site-footer {
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand glow" asp-area="" asp-controller="Product" asp-action="Index">
+                    🌟 Otzivi
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index">
+                                <i class="fas fa-shirt me-1"></i>Товары
+                            </a>
+                        </li>
+                        <!-- ДОБАВИМ ССЫЛКИ В ГЛАВНОЕ МЕНЮ (опционально) -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/privacy-policy">
+                                <i class="fas fa-shield-alt me-1"></i>Конфиденциальность
+                            </a>
+                        </li>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- ФУТЕР -->
+    <footer class="site-footer mt-5">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h6 class="footer-section-title">Otzivi</h6>
+                    <p class="text-muted mb-3">Платформа для честных отзывов о товарах и услугах. Делитесь мнением, читайте отзывы, выбирайте лучшее.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-muted"><i class="fab fa-vk fa-lg"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-telegram fa-lg"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-github fa-lg"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h6 class="footer-section-title">Навигация</h6>
+                    <div class="row">
+                        <div class="col-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><a href="/Product"><i class="fas fa-chevron-right me-1"></i>Товары</a></li>
+                                <li class="mb-2"><a href="/Review/Create"><i class="fas fa-chevron-right me-1"></i>Написать отзыв</a></li>
+                                <li class="mb-2"><a href="/Account/Dashboard"><i class="fas fa-chevron-right me-1"></i>Личный кабинет</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><a href="/Account/Login"><i class="fas fa-chevron-right me-1"></i>Войти</a></li>
+                                <li class="mb-2"><a href="/Account/Register"><i class="fas fa-chevron-right me-1"></i>Регистрация</a></li>
+                                <li class="mb-2"><a href="/Home/Privacy"><i class="fas fa-chevron-right me-1"></i>Политика</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <h6 class="footer-section-title">Правовая информация</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="/privacy-policy">
+                                <i class="fas fa-shield-alt me-2 text-primary"></i>
+                                Политика конфиденциальности
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="/terms-of-service">
+                                <i class="fas fa-file-contract me-2 text-success"></i>
+                                Условия пользовательского соглашения
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="/Home/Privacy">
+                                <i class="fas fa-lock me-2 text-warning"></i>
+                                Обработка персональных данных
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="mailto:support@otzivi.com">
+                                <i class="fas fa-envelope me-2 text-info"></i>
+                                Поддержка: support@otzivi.com
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="mt-4 pt-3 border-top border-secondary">
+                        <p class="footer-copyright mb-0">
+                            <i class="far fa-copyright me-1"></i>
+                            @DateTime.Now.Year Otzivi. Все права защищены.<br>
+                            <small>Версия 2.0.0</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CSRF токен для JavaScript (если пользователь аутентифицирован) -->
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.AntiForgeryToken()
+    }
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Styles", required: false)
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

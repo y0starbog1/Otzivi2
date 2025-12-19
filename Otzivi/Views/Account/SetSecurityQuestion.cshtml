@@ -1,0 +1,55 @@
+﻿@using Otzivi.ViewModels
+@model SetSecurityQuestionViewModel
+@{
+    ViewData["Title"] = "Секретный вопрос для 2FA";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>@ViewData["Title"]</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="SecurityQuestion" class="form-label"></label>
+                            <select asp-for="SecurityQuestion" class="form-select">
+                                <option value="">-- Выберите вопрос --</option>
+                                @foreach (var question in Model.AvailableQuestions)
+                                {
+                                    <option value="@question">@question</option>
+                                }
+                            </select>
+                            <span asp-validation-for="SecurityQuestion" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="SecurityAnswer" class="form-label"></label>
+                            <input asp-for="SecurityAnswer" class="form-control" />
+                            <span asp-validation-for="SecurityAnswer" class="text-danger"></span>
+                            <div class="form-text">Ответ будет храниться в зашифрованном виде</div>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input asp-for="Enable2FA" class="form-check-input" />
+                            <label asp-for="Enable2FA" class="form-check-label"></label>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Сохранить настройки</button>
+                            <a asp-action="Dashboard" class="btn btn-secondary">Назад в кабинет</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

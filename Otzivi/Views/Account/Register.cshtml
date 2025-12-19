@@ -1,0 +1,118 @@
+﻿@model Otzivi.ViewModels.RegisterViewModel
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Создание аккаунта</h4>
+                </div>
+
+                <div class="card-body">
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                {
+                                    <li>@error.ErrorMessage</li>
+                                }
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
+
+                    <form asp-action="Register" method="post">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="FirstName" class="form-label">Имя</label>
+                                <input asp-for="FirstName" class="form-control" required />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="LastName" class="form-label">Фамилия</label>
+                                <input asp-for="LastName" class="form-control" />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">Email</label>
+                            <input asp-for="Email" class="form-control" type="email" required />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label">Пароль</label>
+                            <input asp-for="Password" class="form-control" type="password" required />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                            <div class="form-text">Минимум 6 символов</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="ConfirmPassword" class="form-label">Подтвердите пароль</label>
+                            <input asp-for="ConfirmPassword" class="form-control" type="password" required />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+                        <!-- 🔐 КАПЧА -->
+                        <div class="mb-4">
+                            <label asp-for="CaptchaCode" class="form-label">Введите код с картинки:</label>
+                            <div class="d-flex align-items-center mb-2">
+                                <img id="captchaImage"
+                                     src="/Captcha/GetImage"
+                                     alt="CAPTCHA"
+                                     class="border rounded"
+                                     style="height: 50px; width: 150px; background-color: #f8f9fa;"
+                                     onerror="imgError(this)">
+                                <button type="button"
+                                        onclick="refreshCaptcha()"
+                                        class="btn btn-outline-secondary btn-sm ms-2">
+                                    🔄 Обновить
+                                </button>
+                            </div>
+                            <input asp-for="CaptchaCode"
+                                   class="form-control"
+                                   required
+                                   placeholder="Введите 4 символа"
+                                   maxlength="4"
+                                   style="width: 200px;">
+                            <span asp-validation-for="CaptchaCode" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="fas fa-user-plus me-2"></i>Зарегистрироваться
+                            </button>
+                            <a href="@Url.Action("Login", "Account")" class="btn btn-link">
+                                Уже есть аккаунт? Войти
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function refreshCaptcha() {
+            var captchaImg = document.getElementById('captchaImage');
+            var timestamp = new Date().getTime();
+            captchaImg.src = '/Captcha/GetImage?t=' + timestamp;
+            document.getElementById('CaptchaCode').value = '';
+        }
+
+        function imgError(image) {
+            console.error('Ошибка загрузки капчи');
+            image.style.border = '2px solid red';
+            image.alt = 'Ошибка загрузки капчи';
+        }
+    </script>
+}

@@ -1,0 +1,138 @@
+﻿@model Otzivi.ViewModels.ProductDetailsViewModel
+@{
+    ViewData["Title"] = Model.Product.Name;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="@Model.Product.ImageUrl" class="img-fluid rounded" alt="@Model.Product.Name">
+        </div>
+        <div class="col-md-6">
+            <h1>@Model.Product.Name</h1>
+            <h4 class="text-muted">@Model.Product.Brand</h4>
+            <p>@Model.Product.Description</p>
+
+            <div class="mb-3">
+                <h5>
+                    Рейтинг:
+                    <span class="text-warning">
+                        @{
+                            // 🔧 ИСПРАВЛЕННАЯ ЛОГИКА - БЕЗОПАСНЫЙ РАСЧЕТ РЕЙТИНГА
+                            var activeReviews = Model.Product.Reviews.Where(r => r.IsActive).ToList();
+                            var avgRating = activeReviews.Any() ? activeReviews.Average(r => r.Rating) : 0;
+                            var totalReviews = activeReviews.Count;
+                        }
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <i class="fas fa-star@(i <= avgRating ? " text-warning" : "-o text-muted")"></i>
+                        }
+                    </span>
+                    <span class="ms-2">@avgRating.ToString("F1") (@totalReviews отзывов)</span>
+                </h5>
+            </div>
+
+            <h3 class="text-success">@Model.Product.Price.ToString("C")</h3>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <h3>Отзывы</h3>
+
+            @if (User.Identity.IsAuthenticated && !Model.HasUserReviewed)
+            {
+                <div class="mb-3">
+                    <a href="@Url.Action("Create", "Review", new { productId = Model.Product.Id })" class="btn btn-success">Написать отзыв</a>
+                </div>
+            }
+            else if (User.Identity.IsAuthenticated)
+            {
+                <div class="alert alert-info">
+                    Вы уже оставляли отзыв на этот продукт
+                </div>
+            }
+
+            @{
+                // 🔧 ИСПРАВЛЕННАЯ ЛОГИКА - ФИЛЬТРАЦИЯ АКТИВНЫХ ОТЗЫВОВ
+                var visibleReviews = Model.Reviews.Where(r => r.IsActive).ToList();
+            }
+
+            @if (!visibleReviews.Any())
+            {
+                <div class="alert alert-info">
+                    Пока нет отзывов на этот продукт. Будьте первым!
+                </div>
+            }
+            else
+            {
+                foreach (var review in visibleReviews)
+                {
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h5 class="card-title">@review.Title</h5>
+                                <div class="text-warning">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        <i class="fas fa-star@(i <= review.Rating ? " text-warning" : "-o text-muted")"></i>
+                                    }
+                                </div>
+                            </div>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                @review.User?.UserName
+                                @if (review.IsVerifiedPurchase)
+                                {
+                                    <span class="badge bg-success">Проверенная покупка</span>
+                                }
+                                <small class="text-muted">@review.CreatedAt.ToString("dd.MM.yyyy")</small>
+                            </h6>
+                            <p class="card-text">@review.Content</p>
+
+                            <div class="d-flex align-items-center">
+                                <button class="btn btn-outline-primary btn-sm me-2 like-btn"
+                                        data-review-id="@review.Id"
+                                        data-is-like="true">
+                                    <i class="fas fa-thumbs-up"></i>
+                                    <span class="like-count">@review.LikesCount</span>
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm me-2 dislike-btn"
+                                        data-review-id="@review.Id"
+                                        data-is-like="false">
+                                    <i class="fas fa-thumbs-down"></i>
+                                    <span class="dislike-count">@review.DislikesCount</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.like-btn, .dislike-btn').click(function() {
+                var button = $(this);
+                var reviewId = button.data('review-id');
+                var isLike = button.data('is-like');
+
+                $.post('@Url.Action("LikeReview", "Review")', {
+                    reviewId: reviewId,
+                    isLike: isLike
+                }, function(data) {
+                    if (data.success) {
+                        button.closest('.card').find('.like-count').text(data.likesCount);
+                        button.closest('.card').find('.dislike-count').text(data.dislikesCount);
+                    } else {
+                        alert(data.message);
+                    }
+                });
+            });
+        });
+    </script>
+}

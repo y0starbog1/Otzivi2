@@ -1,0 +1,468 @@
+﻿@{
+    ViewData["Title"] = "Обработка персональных данных";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Заголовок -->
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold mb-3">
+                    <i class="fas fa-database text-primary me-2"></i>
+                    @ViewData["Title"]
+                </h1>
+                <div class="alert alert-primary d-inline-flex align-items-center">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <span>Версия 1.2 | Последнее обновление: 15 марта 2024</span>
+                </div>
+            </div>
+
+            <!-- Карточки с основной информацией -->
+            <div class="row mb-5">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-primary">
+                        <div class="card-body text-center">
+                            <div class="display-4 text-primary mb-3">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <h5 class="card-title">Принципы обработки</h5>
+                            <p class="card-text">Законность, справедливость, прозрачность, ограничение целей, минимизация данных.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-success">
+                        <div class="card-body text-center">
+                            <div class="display-4 text-success mb-3">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <h5 class="card-title">Меры защиты</h5>
+                            <p class="card-text">Шифрование, контроль доступа, резервное копирование, регулярный аудит безопасности.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-warning">
+                        <div class="card-body text-center">
+                            <div class="display-4 text-warning mb-3">
+                                <i class="fas fa-history"></i>
+                            </div>
+                            <h5 class="card-title">Сроки хранения</h5>
+                            <p class="card-text">Данные хранятся не дольше, чем требуется для достижения целей обработки.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Основное содержание -->
+            <div class="card shadow-lg">
+                <div class="card-body p-4">
+                    <!-- Введение -->
+                    <section class="mb-5">
+                        <h2 class="h3 border-bottom pb-2 mb-4">
+                            <i class="fas fa-file-alt text-primary me-2"></i>Общие положения
+                        </h2>
+                        <p>Настоящая Политика обработки персональных данных (далее — "Политика") определяет порядок обработки персональных данных пользователей сервиса "Otzivi" (далее — "Сервис").</p>
+
+                        <div class="alert alert-info">
+                            <h6><i class="fas fa-lightbulb me-2"></i>Основные понятия:</h6>
+                            <ul class="mb-0">
+                                <li><strong>Персональные данные</strong> — любая информация, относящаяся к идентифицированному или идентифицируемому физическому лицу</li>
+                                <li><strong>Обработка</strong> — любое действие с персональными данными (сбор, хранение, использование и т.д.)</li>
+                                <li><strong>Оператор</strong> — администрация Сервиса, осуществляющая обработку данных</li>
+                                <li><strong>Субъект данных</strong> — пользователь, чьи данные обрабатываются</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Категории данных -->
+                    <section class="mb-5">
+                        <h2 class="h3 border-bottom pb-2 mb-4">
+                            <i class="fas fa-list text-success me-2"></i>Категории обрабатываемых данных
+                        </h2>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered">
+                                <thead class="table-success">
+                                    <tr>
+                                        <th>Категория данных</th>
+                                        <th>Примеры</th>
+                                        <th>Правовое основание</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Идентификационные данные</strong></td>
+                                        <td>Email, имя пользователя, IP-адрес</td>
+                                        <td>Исполнение договора (ст. 6(1)(b) GDPR)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Данные активности</strong></td>
+                                        <td>История входов, просмотренные страницы, действия на сайте</td>
+                                        <td>Законные интересы (ст. 6(1)(f) GDPR)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Технические данные</strong></td>
+                                        <td>Тип браузера, операционная система, разрешение экрана</td>
+                                        <td>Согласие (ст. 6(1)(a) GDPR)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Пользовательский контент</strong></td>
+                                        <td>Отзывы, комментарии, оценки</td>
+                                        <td>Исполнение договора</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Данные для безопасности</strong></td>
+                                        <td>Хеши паролей, данные о попытках входа</td>
+                                        <td>Законные интересы (безопасность)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- Цели обработки -->
+                    <section class="mb-5">
+                        <h2 class="h3 border-bottom pb-2 mb-4">
+                            <i class="fas fa-bullseye text-warning me-2"></i>Цели обработки данных
+                        </h2>
+
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-header bg-warning bg-opacity-10">
+                                        <h6 class="mb-0"><i class="fas fa-user-check text-warning me-2"></i>Основные цели</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul>
+                                            <li>Предоставление доступа к функциям Сервиса</li>
+                                            <li>Идентификация и аутентификация пользователей</li>
+                                            <li>Обработка запросов и обращений</li>
+                                            <li>Отправка уведомлений и транзакционных писем</li>
+                                            <li>Обеспечение безопасности аккаунтов</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-header bg-info bg-opacity-10">
+                                        <h6 class="mb-0"><i class="fas fa-chart-line text-info me-2"></i>Дополнительные цели</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul>
+                                            <li>Анализ использования Сервиса для улучшения</li>
+                                            <li>Персонализация пользовательского опыта</li>
+                                            <li>Профилактика мошенничества и злоупотреблений</li>
+                                            <li>Выполнение юридических обязательств</li>
+                                            <li>Маркетинговые исследования (только с согласия)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Технические меры защиты -->
+                    <section class="mb-5">
+                        <h2 class="h3 border-bottom pb-2 mb-4">
+                            <i class="fas fa-shield-alt text-danger me-2"></i>Технические и организационные меры защиты
+                        </h2>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="card border-danger h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-lock me-2"></i>Технические меры</h5>
+                                        <div class="table-responsive">
+                                            <table class="table table-sm">
+                                                <tr>
+                                                    <td><strong>Шифрование</strong></td>
+                                                    <td>SSL/TLS для передачи, AES-256 для хранения</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Аутентификация</strong></td>
+                                                    <td>Многофакторная аутентификация, OAuth 2.0</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Контроль доступа</strong></td>
+                                                    <td>Ролевая модель (RBAC), минимальные привилегии</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Резервное копирование</strong></td>
+                                                    <td>Ежедневное бэкапирование, гео-репликация</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Мониторинг</strong></td>
+                                                    <td>24/7 мониторинг, SIEM-системы, логирование</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="card border-primary h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-users-cog me-2"></i>Организационные меры</h5>
+                                        <ul>
+                                            <li>Назначение ответственного за защиту данных (DPO)</li>
+                                            <li>Регулярное обучение сотрудников</li>
+                                            <li>Политики и процедуры информационной безопасности</li>
+                                            <li>Регулярные аудиты и penetration testing</li>
+                                            <li>План реагирования на инциденты (IRP)</li>
+                                            <li>Соглашения о конфиденциальности с сотрудниками</li>
+                                            <li>Оценка рисков (DPIA) для новых процессов</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Права субъектов данных -->
+                    <section class="mb-5">
+                        <h2 class="h3 border-bottom pb-2 mb-4">
+                            <i class="fas fa-gavel text-purple me-2"></i>Права субъектов персональных данных
+                        </h2>
+
+                        <div class="accordion" id="rightsAccordion">
+                            @{
+                                var rightsList = new[]
+                                {
+                                                        new {
+                                                        Id = "rightAccess",
+                                                        Title = "Право на доступ",
+                                                        Icon = "fas fa-eye",
+                                                        Content = "Вы можете запросить подтверждение обработки ваших данных и получить копию обрабатываемых данных."
+                                                        },
+                                                        new {
+                                                        Id = "rightRectification",
+                                                        Title = "Право на исправление",
+                                                        Icon = "fas fa-edit",
+                                                        Content = "Вы можете исправить неточные или неполные данные через личный кабинет или обращение."
+                                                        },
+                                                        new {
+                                                        Id = "rightErasure",
+                                                        Title = "Право на удаление",
+                                                        Icon = "fas fa-trash-alt",
+                                                        Content = "Вы можете потребовать удаления ваших данных при отсутствии законных оснований для обработки."
+                                                        },
+                                                        new {
+                                                        Id = "rightRestriction",
+                                                        Title = "Право на ограничение",
+                                                        Icon = "fas fa-pause",
+                                                        Content = "Вы можете потребовать временного приостановления обработки в определенных случаях."
+                                                        },
+                                                        new {
+                                                        Id = "rightPortability",
+                                                        Title = "Право на переносимость",
+                                                        Icon = "fas fa-file-export",
+                                                        Content = "Вы можете получить ваши данные в структурированном формате для передачи другому оператору."
+                                                        },
+                                                        new {
+                                                        Id = "rightObject",
+                                                        Title = "Право на возражение",
+                                                        Icon = "fas fa-ban",
+                                                        Content = "Вы можете возразить против обработки данных для прямого маркетинга или на основании законных интересов."
+                                                        }
+                                                        };
+                            }
+
+                            @for (int i = 0; i < rightsList.Length; i++)
+                            {
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header">
+                                        <button class="accordion-button @(i > 0 ? "collapsed" : "")" type="button" data-bs-toggle="collapse" data-bs-target="#@rightsList[i].Id">
+                                            <i class="@rightsList[i].Icon me-2"></i>@rightsList[i].Title
+                                        </button>
+                                    </h3>
+                                    <div id="@rightsList[i].Id" class="accordion-collapse collapse @(i == 0 ? "show" : "")" data-bs-parent="#rightsAccordion">
+                                        <div class="accordion-body">
+                                            @rightsList[i].Content
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="mt-4">
+                            <a href="/Account/Dashboard" class="btn btn-outline-primary me-2">
+                                <i class="fas fa-user-cog me-2"></i>Управление данными в личном кабинете
+                            </a>
+                            <a href="mailto:dpo@otzivi.com" class="btn btn-outline-success">
+                                <i class="fas fa-envelope me-2"></i>Обратиться к DPO
+                            </a>
+                        </div>
+                    </section>
+
+                    <!-- Передача данных -->
+                    <section class="mb-5">
+                        <h2 class="h3 border-bottom pb-2 mb-4">
+                            <i class="fas fa-exchange-alt text-info me-2"></i>Передача персональных данных
+                        </h2>
+
+                        <div class="alert alert-warning">
+                            <h6><i class="fas fa-exclamation-triangle me-2"></i>Важно!</h6>
+                            <p class="mb-0">Мы не продаем и не передаем данные третьим лицам для их маркетинговых целей без вашего явного согласия.</p>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-header bg-light">
+                                        <h6 class="mb-0">Внутрироссийская передача</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>Данные могут передаваться:</p>
+                                        <ul>
+                                            <li>Хостинг-провайдерам в РФ</li>
+                                            <li>Сервисам рассылки email</li>
+                                            <li>Платежным системам (при оплате)</li>
+                                            <li>Сервисам аналитики (обезличенные данные)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-header bg-light">
+                                        <h6 class="mb-0">Международная передача</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>В случае передачи данных за пределы РФ:</p>
+                                        <ul>
+                                            <li>Страны с адекватным уровнем защиты (список ФСТЭК)</li>
+                                            <li>При наличии стандартных договорных положений</li>
+                                            <li>С вашего явного информированного согласия</li>
+                                            <li>Для исполнения договора с вами</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Инциденты и контакты -->
+                    <section class="mb-4">
+                        <h2 class="h3 border-bottom pb-2 mb-4">
+                            <i class="fas fa-phone-alt text-success me-2"></i>Контакты и отчетность
+                        </h2>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="card border-success h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <i class="fas fa-user-tie text-success me-2"></i>
+                                            Ответственный за защиту данных (DPO)
+                                        </h5>
+                                        <p class="card-text">
+                                            <strong>Email:</strong> <a href="mailto:dpo@otzivi.com">dpo@otzivi.com</a><br>
+                                            <strong>Срок ответа:</strong> 30 календарных дней<br>
+                                            <strong>Язык общения:</strong> русский, английский<br>
+                                            <strong>Формат обращения:</strong> письменный (email)
+                                        </p>
+                                        <p class="small text-muted">
+                                            DPO выступает в качестве связующего звена между вами, Сервисом и надзорными органами.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="card border-danger h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <i class="fas fa-exclamation-circle text-danger me-2"></i>
+                                            Сообщение об инцидентах
+                                        </h5>
+                                        <p class="card-text">
+                                            При подозрении на утечку или неправомерный доступ к вашим данным:
+                                        </p>
+                                        <ul class="mb-3">
+                                            <li>Немедленно сообщите на <a href="mailto:security@otzivi.com">security@otzivi.com</a></li>
+                                            <li>Укажите характер инцидента</li>
+                                            <li>Сохраните все доказательства</li>
+                                        </ul>
+                                        <p class="small text-muted">
+                                            Мы обязуемся уведомить вас о значительных инцидентах в течение 72 часов.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h5><i class="fas fa-balance-scale me-2"></i>Надзорные органы</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p class="mb-1"><strong>Роскомнадзор</strong></p>
+                                        <p class="small text-muted mb-2">Федеральная служба по надзору в сфере связи, информационных технологий и массовых коммуникаций</p>
+                                        <a href="https://rkn.gov.ru" target="_blank" class="btn btn-sm btn-outline-secondary">rkn.gov.ru</a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="mb-1"><strong>ФСТЭК России</strong></p>
+                                        <p class="small text-muted mb-2">Федеральная служба по техническому и экспортному контролю</p>
+                                        <a href="https://fstec.ru" target="_blank" class="btn btn-sm btn-outline-secondary">fstec.ru</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Заключение -->
+                    <div class="text-center mt-5 pt-4 border-top">
+                        <h5 class="mb-3">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Документ зарегистрирован и введен в действие
+                        </h5>
+                        <p class="text-muted mb-4">
+                            <strong>Регистрационный номер:</strong> ППД-2024-001<br>
+                            <strong>Дата введения:</strong> 15 марта 2024 года<br>
+                            <strong>Следующий пересмотр:</strong> 15 сентября 2024 года
+                        </p>
+
+                        <div class="d-flex flex-wrap justify-content-center gap-3">
+                            <a href="/privacy-policy" class="btn btn-primary">
+                                <i class="fas fa-shield-alt me-2"></i>Политика конфиденциальности
+                            </a>
+                            <a href="/terms-of-service" class="btn btn-success">
+                                <i class="fas fa-file-contract me-2"></i>Пользовательское соглашение
+                            </a>
+                            <a href="/Account/Dashboard" class="btn btn-outline-secondary">
+                                <i class="fas fa-cog me-2"></i>Настройки данных
+                            </a>
+                        </div>
+
+                        <div class="mt-4">
+                            <p class="small text-muted">
+                                <i class="fas fa-history me-1"></i>
+                                История изменений: Версия 1.0 (01.01.2024) → Версия 1.1 (01.02.2024) → Версия 1.2 (15.03.2024)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .text-purple {
+        color: #6f42c1 !important;
+    }
+
+    .card.border-purple {
+        border-color: #6f42c1 !important;
+    }
+
+    .accordion-button:not(.collapsed) {
+        background-color: rgba(13, 110, 253, 0.1);
+        color: #0d6efd;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+</style>

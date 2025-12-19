@@ -1,0 +1,90 @@
+﻿@model List<Otzivi.Models.SecurityEvent>
+@{
+    ViewData["Title"] = "История безопасности";
+}
+
+<div class="container">
+    <h1>🔐 История безопасности</h1>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            <p>Нет записей о событиях безопасности.</p>
+        </div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-header">
+                <h5>Последние события безопасности</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Время</th>
+                                <th>Событие</th>
+                                <th>Описание</th>
+                                <th>Важность</th>
+                                <th>IP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.CreatedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</td>
+                                    <td>
+                                        <span class="badge @GetEventBadgeClass(item.EventType)">
+                                            @GetEventName(item.EventType)
+                                        </span>
+                                    </td>
+                                    <td>@item.Description</td>
+                                    <td>
+                                        <span class="badge @GetSeverityBadgeClass(item.Severity)">
+                                            @item.Severity
+                                        </span>
+                                    </td>
+                                    <td><small>@item.IpAddress</small></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@functions {
+    string GetEventBadgeClass(Otzivi.Models.SecurityEventType eventType)
+    {
+        return eventType switch
+        {
+            Otzivi.Models.SecurityEventType.FailedLoginAttempt => "bg-danger",
+            Otzivi.Models.SecurityEventType.MultipleFailedAttempts => "bg-danger",
+            Otzivi.Models.SecurityEventType.SuccessfulLogin => "bg-success",
+            Otzivi.Models.SecurityEventType.PasswordChanged => "bg-warning",
+            Otzivi.Models.SecurityEventType.TwoFactorEnabled => "bg-info",
+            Otzivi.Models.SecurityEventType.TwoFactorDisabled => "bg-warning",
+            _ => "bg-secondary"
+        };
+    }
+
+    string GetSeverityBadgeClass(Otzivi.Models.SecurityEventSeverity severity)
+    {
+        return severity switch
+        {
+            Otzivi.Models.SecurityEventSeverity.Critical => "bg-danger",
+            Otzivi.Models.SecurityEventSeverity.High => "bg-warning",
+            Otzivi.Models.SecurityEventSeverity.Medium => "bg-info",
+            _ => "bg-secondary"
+        };
+    }
+
+    string GetEventName(Otzivi.Models.SecurityEventType eventType)
+    {
+        return eventType.ToString();
+    }
+}

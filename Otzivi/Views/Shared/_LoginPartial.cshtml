@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Otzivi.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Dashboard">Личный кабинет</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Review" asp-action="MyReviews">Мои отзывы</a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-controller="Account" asp-action="Logout" method="post">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="nav-link btn btn-link text-dark">Выйти</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Account" asp-action="Register">
+                <i class="fas fa-user-plus me-1"></i>Регистрация
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Account" asp-action="Login">
+                <i class="fas fa-sign-in-alt me-1"></i>Войти
+            </a>
+        </li>
+    }
+    @if (User.IsInRole("Moderator") || User.IsInRole("Admin"))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Moderator" asp-action="Index">🛡️ Модерация</a>
+        </li>
+    }
+    @if (User.IsInRole("Admin"))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Admin" asp-action="Index">👑 Админка</a>
+        </li>
+    }
+</ul>

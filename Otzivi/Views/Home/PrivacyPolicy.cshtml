@@ -1,0 +1,368 @@
+﻿@{
+    ViewData["Title"] = "Политика конфиденциальности";
+}
+
+<div class="container mt-4 legal-container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Заголовок с обновлением -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="display-6 fw-bold">@ViewData["Title"]</h1>
+                <div class="text-muted">
+                    <small>Последнее обновление: @ViewData["LastUpdated"]</small>
+                </div>
+            </div>
+
+            <!-- Контактная информация -->
+            <div class="alert alert-info mb-4">
+                <h5 class="alert-heading"><i class="fas fa-info-circle me-2"></i>Контактная информация</h5>
+                <p class="mb-0">
+                    По вопросам защиты данных обращайтесь:
+                    <a href="mailto:privacy@otzivi.com" class="alert-link">privacy@otzivi.com</a>
+                </p>
+            </div>
+
+            <!-- Основное содержимое -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <!-- 1. Какие данные собираются -->
+                    <section class="mb-5">
+                        <h2 class="h4 border-bottom pb-2 mb-3">
+                            <i class="fas fa-database text-primary me-2"></i>1. Какие данные собираются
+                        </h2>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100 border-start border-primary border-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Личные данные</h5>
+                                        <ul class="list-unstyled">
+                                            <li><i class="fas fa-user text-primary me-2"></i>Имя и фамилия</li>
+                                            <li><i class="fas fa-envelope text-primary me-2"></i>Email адрес</li>
+                                            <li><i class="fas fa-calendar text-primary me-2"></i>Дата регистрации</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100 border-start border-info border-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Техническая информация</h5>
+                                        <ul class="list-unstyled">
+                                            <li><i class="fas fa-desktop text-info me-2"></i>IP-адрес</li>
+                                            <li><i class="fas fa-cookie text-info me-2"></i>Cookie и метрики</li>
+                                            <li><i class="fas fa-history text-info me-2"></i>Логи доступа</li>
+                                            <li><i class="fas fa-mobile-alt text-info me-2"></i>Тип устройства и браузера</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 2. Цели обработки данных -->
+                    <section class="mb-5">
+                        <h2 class="h4 border-bottom pb-2 mb-3">
+                            <i class="fas fa-bullseye text-success me-2"></i>2. Цели обработки данных
+                        </h2>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="d-flex align-items-start">
+                                    <div class="bg-success bg-opacity-10 p-3 rounded me-3">
+                                        <i class="fas fa-user-check text-success fa-lg"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="fw-bold">Регистрация и аутентификация</h6>
+                                        <p class="text-muted small">Создание и управление аккаунтом пользователя</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="d-flex align-items-start">
+                                    <div class="bg-info bg-opacity-10 p-3 rounded me-3">
+                                        <i class="fas fa-chart-line text-info fa-lg"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="fw-bold">Аналитика и улучшение</h6>
+                                        <p class="text-muted small">Анализ использования сервиса для улучшения функционала</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="d-flex align-items-start">
+                                    <div class="bg-warning bg-opacity-10 p-3 rounded me-3">
+                                        <i class="fas fa-shield-alt text-warning fa-lg"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="fw-bold">Безопасность</h6>
+                                        <p class="text-muted small">Защита от мошенничества и несанкционированного доступа</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 3. Основания обработки -->
+                    <section class="mb-5">
+                        <h2 class="h4 border-bottom pb-2 mb-3">
+                            <i class="fas fa-balance-scale text-warning me-2"></i>3. Основания обработки данных
+                        </h2>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Основание</th>
+                                        <th>Описание</th>
+                                        <th>Примеры</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Согласие пользователя</strong></td>
+                                        <td>Явное согласие при регистрации и использовании сервиса</td>
+                                        <td>Подписка на рассылку, настройки уведомлений</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Договорные обязательства</strong></td>
+                                        <td>Обработка, необходимая для предоставления услуг</td>
+                                        <td>Создание аккаунта, обработка отзывов</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Законные интересы</strong></td>
+                                        <td>Обработка для обеспечения безопасности и улучшения сервиса</td>
+                                        <td>Анализ использования, предотвращение мошенничества</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Требования закона</strong></td>
+                                        <td>Выполнение юридических обязательств</td>
+                                        <td>Налоговая отчетность, ответ на запросы правоохранительных органов</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- 4. Передача данных третьим лицам -->
+                    <section class="mb-5">
+                        <h2 class="h4 border-bottom pb-2 mb-3">
+                            <i class="fas fa-share-alt text-danger me-2"></i>4. Передача данных третьим лицам
+                        </h2>
+                        <div class="alert alert-warning">
+                            <p class="mb-0">Мы <strong>не продаем</strong> ваши персональные данные. Передача осуществляется только в следующих случаях:</p>
+                        </div>
+                        <div class="row g-3">
+                            @{
+                                var thirdParties = new[]
+                                {
+                                                        new { Name = "Хостинг-провайдеры", Purpose = "Размещение серверов и хранение данных", Location = "ЕС/Россия" },
+                                                        new { Name = "Email-сервисы", Purpose = "Отправка уведомлений и транзакционных писем", Location = "ЕС" },
+                                                        new { Name = "Платежные системы", Purpose = "Обработка платежей (если предусмотрено)", Location = "Глобально" },
+                                                        new { Name = "Аналитические сервисы", Purpose = "Анонимная аналитика использования", Location = "ЕС/США" }
+                                                        };
+                            }
+                            @foreach (var service in thirdParties)
+                            {
+                                <div class="col-md-6">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title fw-bold">@service.Name</h6>
+                                            <p class="card-text small">@service.Purpose</p>
+                                            <span class="badge bg-secondary">@service.Location</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </section>
+
+                    <!-- 5. Хранение и защита данных -->
+                    <section class="mb-5">
+                        <h2 class="h4 border-bottom pb-2 mb-3">
+                            <i class="fas fa-lock text-success me-2"></i>5. Хранение и защита данных
+                        </h2>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <h5><i class="fas fa-shield-alt text-success me-2"></i>Меры безопасности</h5>
+                                <ul>
+                                    <li>Шифрование данных при передаче (SSL/TLS)</li>
+                                    <li>Хеширование паролей с использованием BCrypt</li>
+                                    <li>Регулярное обновление и патчинг систем</li>
+                                    <li>Двухфакторная аутентификация</li>
+                                    <li>Мониторинг и логирование доступа</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <h5><i class="fas fa-clock text-primary me-2"></i>Сроки хранения</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <tr>
+                                            <td>Активные аккаунты</td>
+                                            <td><span class="badge bg-primary">До удаления аккаунта</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Неактивные аккаунты</td>
+                                            <td><span class="badge bg-warning">3 года</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Логи доступа</td>
+                                            <td><span class="badge bg-secondary">1 год</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cookie</td>
+                                            <td><span class="badge bg-info">До 1 года</span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 6. Права пользователя -->
+                    <section class="mb-5">
+                        <h2 class="h4 border-bottom pb-2 mb-3">
+                            <i class="fas fa-user-shield text-primary me-2"></i>6. Права пользователя
+                        </h2>
+                        <div class="accordion" id="userRightsAccordion">
+                            @{
+                                var rights = new[]
+                                {
+                                                        new { Id = "right1", Title = "Право на доступ", Icon = "fas fa-eye", Content = "Вы можете запросить копию ваших персональных данных." },
+                                                        new { Id = "right2", Title = "Право на исправление", Icon = "fas fa-edit", Content = "Вы можете исправить неточные или неполные данные в личном кабинете." },
+                                                        new { Id = "right3", Title = "Право на удаление", Icon = "fas fa-trash-alt", Content = "Вы можете удалить свой аккаунт и все связанные данные." },
+                                                        new { Id = "right4", Title = "Право на ограничение", Icon = "fas fa-pause", Content = "Вы можете временно ограничить обработку ваших данных." },
+                                                        new { Id = "right5", Title = "Право на отзыв согласия", Icon = "fas fa-undo", Content = "Вы можете отозвать согласие на обработку данных в любое время." },
+                                                        new { Id = "right6", Title = "Право на перенос данных", Icon = "fas fa-file-export", Content = "Вы можете запросить передачу ваших данных в машиночитаемом формате." }
+                                                        };
+                            }
+                            @for (int i = 0; i < rights.Length; i++)
+                            {
+                                <div class="accordion-item">
+                                    <h3 class="accordion-header">
+                                        <button class="accordion-button @(i > 0 ? "collapsed" : "")" type="button" data-bs-toggle="collapse" data-bs-target="#@rights[i].Id">
+                                            <i class="@rights[i].Icon me-2"></i>@rights[i].Title
+                                        </button>
+                                    </h3>
+                                    <div id="@rights[i].Id" class="accordion-collapse collapse @(i == 0 ? "show" : "")" data-bs-parent="#userRightsAccordion">
+                                        <div class="accordion-body">
+                                            @rights[i].Content
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="mt-3">
+                            <a href="/Account/Dashboard" class="btn btn-outline-primary">
+                                <i class="fas fa-cog me-2"></i>Управление данными в личном кабинете
+                            </a>
+                        </div>
+                    </section>
+
+                    <!-- 7. Использование файлов Cookie -->
+                    <section class="mb-5">
+                        <h2 class="h4 border-bottom pb-2 mb-3">
+                            <i class="fas fa-cookie-bite text-warning me-2"></i>7. Использование файлов Cookie
+                        </h2>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Тип Cookie</th>
+                                                <th>Назначение</th>
+                                                <th>Срок</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>Необходимые</strong></td>
+                                                <td>Работа основных функций (авторизация, корзина)</td>
+                                                <td>Сессия</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Функциональные</strong></td>
+                                                <td>Запоминание настроек (язык, тема оформления)</td>
+                                                <td>1 год</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Аналитические</strong></td>
+                                                <td>Анализ использования сайта (Google Analytics)</td>
+                                                <td>2 года</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Управление Cookie</h6>
+                                        <p class="small">Вы можете отключить Cookie в настройках браузера:</p>
+                                        <div class="d-grid gap-2">
+                                            <button class="btn btn-sm btn-outline-secondary" onclick="showCookieSettings()">
+                                                <i class="fas fa-sliders-h me-2"></i>Настройки Cookie
+                                            </button>
+                                            <a href="https://support.google.com/chrome/answer/95647" target="_blank" class="btn btn-sm btn-outline-info">
+                                                <i class="fab fa-chrome me-2"></i>Chrome
+                                            </a>
+                                            <a href="https://support.mozilla.org/ru/kb/kuki-informaciya-kotoruyu-sajty-sohranyayut-na-vas" target="_blank" class="btn btn-sm btn-outline-info">
+                                                <i class="fab fa-firefox me-2"></i>Firefox
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 8. Контактная информация -->
+                    <section class="mb-4">
+                        <h2 class="h4 border-bottom pb-2 mb-3">
+                            <i class="fas fa-envelope text-info me-2"></i>8. Контактная информация
+                        </h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card border-info">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-user-tie me-2"></i>Ответственный за защиту данных</h5>
+                                        <p class="card-text">
+                                            Email: <a href="mailto:dpo@otzivi.com" class="text-decoration-none">dpo@otzivi.com</a><br>
+                                            Срок ответа: в течение 30 календарных дней
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card border-secondary">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-balance-scale me-2"></i>Надзорный орган</h5>
+                                        <p class="card-text">
+                                            Роскомнадзор<br>
+                                            <small class="text-muted">По вопросам нарушения законодательства о персональных данных</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Дата обновления -->
+                    <div class="text-center text-muted mt-4 pt-4 border-top">
+                        <p class="mb-0">
+                            <i class="fas fa-history me-2"></i>
+                            Документ вступил в силу: 1 января 2024<br>
+                            Последнее обновление: @ViewData["LastUpdated"]
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function showCookieSettings() {
+            alert('В данном демо-проекте настройки Cookie доступны через панель управления браузера.\n\nВ реальном проекте здесь будет Cookie-консент панель.');
+        }
+    </script>
+}

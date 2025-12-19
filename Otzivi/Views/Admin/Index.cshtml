@@ -1,0 +1,105 @@
+﻿@model List<Otzivi.ViewModels.UserWithRolesViewModel>
+@{
+    ViewData["Title"] = "Панель управления администратора";
+}
+
+<div class="container mt-4">
+    <h1>👑 Панель управления</h1>
+
+    @if (TempData["StatusMessage"] != null)
+    {
+        <div class="alert alert-info">@TempData["StatusMessage"]</div>
+    }
+
+    <div class="card">
+        <div class="card-header">
+            <h5>Управление пользователями и ролями</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Пользователь</th>
+                            <th>Email</th>
+                            <th>Роли</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <strong>@user.UserName</strong><br>
+                                    <small class="text-muted">@user.FirstName @user.LastName</small>
+                                </td>
+                                <td>@user.Email</td>
+                                <td>
+                                    @foreach (var role in user.Roles)
+                                    {
+                                        <span class="badge
+                                                    @(role == "Admin" ? "bg-danger" :
+                                                                                            role == "Moderator" ? "bg-warning" : "bg-secondary")">
+                                    @role
+                                </span>
+                                                                }
+                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <!-- Назначение ролей -->
+                                        @if (!user.Roles.Contains("Admin"))
+                                        {
+                                            <form method="post" asp-action="AssignRole" class="me-1">
+                                                <input type="hidden" name="userId" value="@user.UserId" />
+                                                <input type="hidden" name="roleName" value="Admin" />
+                                                <button type="submit" class="btn btn-outline-danger btn-sm">Сделать Админом</button>
+                                            </form>
+                                        }
+
+                                        @if (!user.Roles.Contains("Moderator"))
+                                        {
+                                            <form method="post" asp-action="AssignRole" class="me-1">
+                                                <input type="hidden" name="userId" value="@user.UserId" />
+                                                <input type="hidden" name="roleName" value="Moderator" />
+                                                <button type="submit" class="btn btn-outline-warning btn-sm">Сделать Модератором</button>
+                                            </form>
+                                        }
+
+                                        <!-- Удаление ролей -->
+                                        @if (user.Roles.Contains("Admin") && user.UserId != User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value)
+                                        {
+                                            <form method="post" asp-action="RemoveRole" class="me-1">
+                                                <input type="hidden" name="userId" value="@user.UserId" />
+                                                <input type="hidden" name="roleName" value="Admin" />
+                                                <button type="submit" class="btn btn-outline-secondary btn-sm">Убрать Админа</button>
+                                            </form>
+                                        }
+
+                                        @if (user.Roles.Contains("Moderator"))
+                                        {
+                                            <form method="post" asp-action="RemoveRole" class="me-1">
+                                                <input type="hidden" name="userId" value="@user.UserId" />
+                                                <input type="hidden" name="roleName" value="Moderator" />
+                                                <button type="submit" class="btn btn-outline-secondary btn-sm">Убрать Модератора</button>
+                                            </form>
+                                        }
+
+                                        <!-- Удаление пользователя (только для не-себя) -->
+                                        @if (user.UserId != User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value)
+                                        {
+                                            <form method="post" asp-action="DeleteUser" onsubmit="return confirm('Вы уверены что хотите удалить этого пользователя?')">
+                                                <input type="hidden" name="userId" value="@user.UserId" />
+                                                <button type="submit" class="btn btn-outline-danger btn-sm">🗑️ Удалить</button>
+                                            </form>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
